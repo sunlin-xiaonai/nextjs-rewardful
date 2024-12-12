@@ -15,7 +15,10 @@ export const AffiliateDashboardCard: React.FC<AffiliateDashboardCardProps> = ({
   const stats = commission_stats.currencies.USD;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 space-y-6">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 space-y-6">
+      <fieldset className="border-4 border-dotted border-indigo-500 p-5">
+          <legend className="px-2 italic text-indigo-500 -mx-2 text-2xl">Personal Information</legend>
+
       {/* Personal Information */}
       <div className="space-y-4">
         <h2 className="text-lg font-semibold">Personal Information</h2>
@@ -97,6 +100,7 @@ export const AffiliateDashboardCard: React.FC<AffiliateDashboardCardProps> = ({
           </div>
         </div>
       </div>
+      </fieldset>
     </div>
   );
 }; 

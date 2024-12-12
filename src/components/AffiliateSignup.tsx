@@ -73,7 +73,7 @@ export const AffiliateSignup: React.FC<AffiliateSignupProps> = ({ onSuccess }) =
   };
 
   return (
-    <div className="flex justify-center items-center bg-gray-1">
+    <div className="flex justify-center items-center  bg-indigo-50">
       {/* 成功提示 */}
       {success && successData && (
         <div className="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-lg max-w-md">
@@ -103,99 +103,123 @@ export const AffiliateSignup: React.FC<AffiliateSignupProps> = ({ onSuccess }) =
 
       <form 
         onSubmit={handleSubmit} 
-        className="affiliate-form relative"
+        className="w-[400px] bg-indigo-50 rounded shadow p-3"
       >
-        <div className="mb-4">
-          <h2 className="text-[#323232] font-black text-2xl">Become an Affiliate</h2>
-          <span className="text-[#666] font-semibold text-lg">Fill in your details to join</span>
-        </div>
-
-        {/* 错误提示 */}
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            <div className="flex items-start">
-              <svg className="w-6 h-6 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              <div className="flex-1">
-                <p className="font-medium">{error.split(':')[0]}</p>
-                {error.includes(':') && (
-                  <p className="text-sm mt-1">{error.split(':')[1].trim()}</p>
-                )}
+        <fieldset className="border-4 border-dotted border-indigo-500 p-5">
+          <legend className="px-2 italic text-indigo-500 -mx-2 text-2xl">Become an Affiliate!</legend>
+          
+          {/* 错误提示 */}
+          {error && (
+            <div className="bg-red-50 border border-red-300 text-red-500 px-4 py-3 rounded mb-4">
+              <div className="flex items-start">
+                <svg className="w-6 h-6 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <div className="flex-1">
+                  <p className="font-medium">{error.split(':')[0]}</p>
+                  {error.includes(':') && (
+                    <p className="text-sm mt-1">{error.split(':')[1].trim()}</p>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        )}
-
-        {/* 表单字段 */}
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className="affiliate-input"
-        />
-
-        <input
-          type="text"
-          name="firstName"
-          placeholder="First Name"
-          value={formData.firstName}
-          onChange={handleChange}
-          required
-          className="affiliate-input"
-        />
-
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-          value={formData.lastName}
-          onChange={handleChange}
-          required
-          className="affiliate-input"
-        />
-
-        <input
-          type="email"
-          name="paypalEmail"
-          placeholder="PayPal Email"
-          value={formData.paypalEmail}
-          onChange={handleChange}
-          required
-          className="affiliate-input"
-        />
-
-        <input
-          type="text"
-          name="inviteCode"
-          placeholder="Invite Code (Optional)"
-          value={formData.inviteCode}
-          onChange={handleChange}
-          className="affiliate-input"
-        />
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="submit-button"
-        >
-          {isSubmitting ? (
-            <div className="flex items-center justify-center">
-              <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-              </svg>
-              <span>Submitting...</span>
-            </div>
-          ) : (
-            <>
-              <span>Submit</span>
-              <span>→</span>
-            </>
           )}
-        </button>
+
+          {/* <div className="mb-4">
+            <h2 className="text-indigo-500 font-black text-2xl">Become an Affiliate</h2>
+            <span className="text-indigo-400 font-semibold text-lg">Fill in your details to join</span>
+          </div> */}
+
+          {/* 表单字段 */}
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-bold text-indigo-500 after:content-['*'] after:text-red-400">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full p-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-indigo-500 rounded"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-bold text-indigo-500 after:content-['*'] after:text-red-400">
+                First Name
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+                className="w-full p-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-indigo-500 rounded"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-bold text-indigo-500 after:content-['*'] after:text-red-400">
+                Last Name
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                className="w-full p-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-indigo-500 rounded"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-bold text-indigo-500 after:content-['*'] after:text-red-400">
+                PayPal Email
+              </label>
+              <input
+                type="email"
+                name="paypalEmail"
+                value={formData.paypalEmail}
+                onChange={handleChange}
+                required
+                className="w-full p-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-indigo-500 rounded"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-bold text-indigo-500">
+                Invite Code (Optional)
+              </label>
+              <input
+                type="text"
+                name="inviteCode"
+                value={formData.inviteCode}
+                onChange={handleChange}
+                className="w-full p-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-indigo-500 rounded"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full rounded bg-indigo-500 text-indigo-50 p-2 text-center font-bold hover:bg-indigo-400 mt-4"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center justify-center">
+                  <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  <span>Submitting...</span>
+                </div>
+              ) : (
+                "Submit Application"
+              )}
+            </button>
+          </div>
+        </fieldset>
       </form>
     </div>
   );

@@ -36,6 +36,7 @@ class RewardfulServiceImpl implements RewardfulService {
     );
   }
 
+  // 创建分销员
   async createAffiliate(data: {
     email: string;
     first_name: string;
@@ -46,10 +47,12 @@ class RewardfulServiceImpl implements RewardfulService {
     return this.api.post('?path=/affiliates', data);
   }
 
+  // 获取分销员详情
   async getAffiliate(id: string): Promise<RewardfulAffiliate> {
     return this.api.get(`?path=/affiliates/${id}`);
   }
 
+  /*
   async getCommissions(affiliateId: string): Promise<{
     data: Commission[];
     total_count: number;
@@ -70,6 +73,17 @@ class RewardfulServiceImpl implements RewardfulService {
     return this.api.get(`?path=/affiliates/${affiliateId}/stats`);
   }
 
+  // 获取单个佣金详情
+  async getCommissionById(id: string): Promise<Commission> {
+    return this.api.get('', {
+      params: {
+        path: `/commissions/${id}`,
+      }
+    });
+  }
+
+  */
+
   // 获取所有分销员列表
   async getAllAffiliates(): Promise<{
     data: RewardfulAffiliate[];
@@ -79,15 +93,6 @@ class RewardfulServiceImpl implements RewardfulService {
       params: {
         path: '/affiliates',
         expand: ['stats']
-      }
-    });
-  }
-
-  // 获取单个佣金详情
-  async getCommissionById(id: string): Promise<Commission> {
-    return this.api.get('', {
-      params: {
-        path: `/commissions/${id}`,
       }
     });
   }
