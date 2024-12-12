@@ -14,6 +14,7 @@ import {
 import { useState, useEffect } from 'react';
 import { AffiliatesList } from '../components/AffiliatesList';
 import { CommissionLookup } from '../components/CommissionLookup';
+import { PayoutLookup } from '../components/PayoutLookup';
 
 export default function Home() {
   const { visitor, isLoading, error } = useRewardful();
@@ -79,6 +80,7 @@ export default function Home() {
                 <AffiliateSignup onSuccess={handleAffiliateSuccess} />
               </div>
               <CommissionLookup />
+              <PayoutLookup />
             </div>
           </div>
         )}

@@ -30,4 +30,30 @@ export interface RewardfulService {
   getCommissionById(id: string): Promise<Commission>;
 
   getDashboardData(affiliateId: string): Promise<DashboardData>;
+
+  // 获取支付记录列表
+  getPayouts(params?: {
+    affiliate_id?: string;
+    state?: Array<'pending' | 'due' | 'processing' | 'paid'>;
+    expand?: Array<'affiliate' | 'commissions'>;
+  }): Promise<{
+    data: Payout[];
+    total_count: number;
+  }>;
+
+  // 标记支付已完成
+  markPayoutAsPaid(payoutId: string): Promise<Payout>;
 } 
+
+export interface Payout {
+  id: string;
+  currency: string;
+  paid_at: string | null;
+  state: 'pending' | 'due' | 'processing' | 'paid';
+  paid_by_id: string | null;
+  created_at: string;
+  updated_at: string;
+  amount: number;
+  affiliate?: RewardfulAffiliate;
+  commissions?: Commission[];
+}

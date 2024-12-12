@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import type { RewardfulAffiliate, Commission, DashboardData } from '@/types';
+import type { RewardfulAffiliate, DashboardData, Payout} from '@/types';
 
 export interface RewardfulService {
   createAffiliate(data: {
@@ -105,6 +105,32 @@ class RewardfulServiceImpl implements RewardfulService {
       }
     });
   }
+
+  // 获取支付记录列表
+  async getPayouts(params?: {
+    affiliate_id?: string;
+    state?: Array<'pending' | 'due' | 'processing' | 'paid'>;
+    expand?: Array<'affiliate' | 'commissions'>;
+  }) {
+    return this.api.get('', {
+      params: {
+        path: '/payouts',
+        affiliate_id: params?.affiliate_id,
+        state: params?.state,
+        expand: params?.expand
+      }
+    });
+  }
+
+  // 标记支付已完成
+  async markPayoutAsPaid(payoutId: string): Promise<Payout> {
+    return this.api.put('', null, {
+      params: {
+        path: `/payouts/${payoutId}/pay`
+      }
+    });
+  }
+
 }
 
 export const rewardfulService = new RewardfulServiceImpl(); 

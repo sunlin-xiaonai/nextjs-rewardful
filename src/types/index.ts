@@ -194,6 +194,19 @@ export interface Money {
   currency_iso: string;
 }
 
+export interface Payout {
+  id: string;
+  currency: string;
+  paid_at: string | null;
+  state: 'pending' | 'due' | 'processing' | 'paid';
+  paid_by_id: string | null;
+  created_at: string;
+  updated_at: string;
+  amount: number;
+  affiliate?: RewardfulAffiliate;
+  commissions?: Commission[];
+}
+
 export interface RewardfulService {
   createAffiliate(data: {
     email: string;
@@ -219,4 +232,17 @@ export interface RewardfulService {
     total_count: number;
   }>;
   getCommissionById(id: string): Promise<Commission>;
+
+  // 获取支付记录列表
+  getPayouts(params?: {
+    affiliate_id?: string;
+    state?: Array<'pending' | 'due' | 'processing' | 'paid'>;
+    expand?: Array<'affiliate' | 'commissions'>;
+  }): Promise<{
+    data: Payout[];
+    total_count: number;
+  }>;
+
+  // 标记支付已完成
+  markPayoutAsPaid(payoutId: string): Promise<Payout>;
 } 

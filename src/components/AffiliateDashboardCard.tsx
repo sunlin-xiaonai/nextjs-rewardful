@@ -21,7 +21,7 @@ export const AffiliateDashboardCard: React.FC<AffiliateDashboardCardProps> = ({
 
       {/* Personal Information */}
       <div className="space-y-4">
-        <h2 className="text-lg font-semibold">Personal Information</h2>
+        {/* <h2 className="text-lg font-semibold">Personal Information</h2> */}
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,6 +49,7 @@ export const AffiliateDashboardCard: React.FC<AffiliateDashboardCardProps> = ({
           </div>
         </div>
       </div>
+      <br />
 
       {/* Referral Link */}
       <div className="space-y-4">
@@ -81,11 +82,11 @@ export const AffiliateDashboardCard: React.FC<AffiliateDashboardCardProps> = ({
           </div>
         </div>
       </div>
-
+      <br />
       {/* Income Status */}
       <div className="space-y-4">
         <h2 className="text-lg font-semibold">Income Status</h2>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           <div className="bg-green-50 p-4 rounded-lg">
             <div className="text-sm text-green-600">Total Income</div>
             <div className="text-2xl font-bold text-green-700">
@@ -94,6 +95,13 @@ export const AffiliateDashboardCard: React.FC<AffiliateDashboardCardProps> = ({
           </div>
           <div className="bg-yellow-50 p-4 rounded-lg">
             <div className="text-sm text-yellow-600">Pending</div>
+            <div className="text-2xl font-bold text-yellow-700">
+              ${(stats.unpaid.cents / 100).toFixed(2)}
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 p-4 rounded-lg">
+            <div className="text-sm text-yellow-600">Available</div>
             <div className="text-2xl font-bold text-yellow-700">
               ${(stats.unpaid.cents / 100).toFixed(2)}
             </div>
