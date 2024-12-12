@@ -1,4 +1,4 @@
 {
-  "/api/rewardful/route": "app/api/rewardful/route.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/api/rewardful/route": "app/api/rewardful/route.js"
 }

@@ -107,17 +107,47 @@ class RewardfulServiceImpl implements RewardfulService {
   }
 
   // 获取支付记录列表
+  // async getPayouts(params?: {
+  //   affiliate_id?: string;
+  //   state?: Array<'pending' | 'due' | 'processing' | 'paid'>;
+  //   expand?: Array<'affiliate' | 'commissions'>;
+  // }) {
+  //   return this.api.get('', {
+  //     params: {
+  //       path: '/payouts',
+  //       affiliate_id: params?.affiliate_id,
+  //       state: params?.state,
+  //       expand: params?.expand
+  //     }
+  //   });
+  // }
+
   async getPayouts(params?: {
     affiliate_id?: string;
     state?: Array<'pending' | 'due' | 'processing' | 'paid'>;
     expand?: Array<'affiliate' | 'commissions'>;
   }) {
+    // 构建查询参数字符串
+    const queryParams = new URLSearchParams();
+    
+    // 如果有 affiliate_id，直接添加到路径参数中
+    const basePath = '/payouts';
+    if (params?.affiliate_id) {
+      queryParams.append('affiliate_id', params.affiliate_id);
+    }
+    if (params?.state) {
+      params.state.forEach(state => queryParams.append('state[]', state));
+    }
+    if (params?.expand) {
+      params.expand.forEach(item => queryParams.append('expand[]', item));
+    }
+
+    // 构建完整的路径
+    const fullPath = `${basePath}${queryParams.toString() ? '?' + queryParams.toString() : ''}`;
+
     return this.api.get('', {
       params: {
-        path: '/payouts',
-        affiliate_id: params?.affiliate_id,
-        state: params?.state,
-        expand: params?.expand
+        path: fullPath
       }
     });
   }
