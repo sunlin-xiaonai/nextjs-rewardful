@@ -132,7 +132,15 @@ export interface DashboardData {
     leads: number;
     conversions: number;
   }>;
-  coupons: any[];
+  // coupons: any[];
+  coupons?:Array<{
+    id: string;
+    external_id: string;
+    token: string;
+    leads: number;
+    conversions: number;
+    affiliate_id: string;
+  }>;
   commission_stats: {
     currencies: {
       [key: string]: {
